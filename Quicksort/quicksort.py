@@ -9,3 +9,22 @@ def quicksort(array):
 
 array = [ 4, 6, 6, 33, 60, 2, 10, 9]    
 print (quicksort(array))
+
+
+
+def bubblesort(array, n):
+    aux = 1
+    while(aux):
+        aux = 0
+        for i in range(n-1):
+            if array[i] > array[i+1]:
+                array[i], array[i+1] = array[i+1], array[i]
+                aux =  1
+
+    return array
+arr = [1, 33, 11, 22, 9, 0, 34, 12]
+bubble = bubblesort(arr, len(arr) )
+print(bubble)
+
+             
+
