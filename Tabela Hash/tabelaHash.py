@@ -1,42 +1,44 @@
+tamanho_tabela = 100
 
-def inserir(tabela_hash, chave, valor):
-    indice = funcao_de_hash(chave)
+def funcao_hash(chave):
+    return hash(chave) % tamanho_tabela
+
+def inserir_tabela(tabela_hash, chave, valor):
+    #cria a função de espalhamento
+    indice = funcao_hash(chave)
     if tabela_hash[indice] is None:
         tabela_hash[indice] = [(chave, valor)]
     else:
-        for i, (ch, val) in enumerate(tabela_hash[indice]):
+        #percorre todos as posições da lista no indice indicado
+        for i, (ch, vl) in enumerate(tabela_hash[indice]):
             if ch == chave:
+                #atualiza o novo valor para a chave encontrada
                 tabela_hash[indice][i] = (chave, valor)
                 break
-        else:
-            tabela_hash[indice].append((chave, valor))
+            #adiciona o novo elemento ao final da lista encadeada:
+            else: tabela_hash[indice].append(chave, valor)
 
-def buscar(tabela_hash, chave):
-    indice = funcao_de_hash(chave)
+def busca_tabela(tabela_hash, chave):
+    indice = funcao_hash(chave)
     if tabela_hash[indice] is not None:
-        for k, v in tabela_hash[indice]:
-            if k == chave:
-                return v
+        for ch, vl in tabela_hash[indice]:
+            if ch == chave:
+                return vl
     return None
 
 
-def funcao_de_hash(chave):
-    #  hash(chave) gera um valor hash único para objetos 
-    return hash(chave) % tamanho_da_tabela
-
-tamanho_da_tabela = 100
 #inicializar a tabela hash como uma lista de tamanho fixo preenchida com None:
-tabela_hash = [None] * tamanho_da_tabela
+tabela_hash = [None] * tamanho_tabela
 
-# Inserir elementos na tabela hash
-inserir(tabela_hash, "chave1", "valor1")
-inserir(tabela_hash, "chave2", "valor2")
+inserir_tabela(tabela_hash, "Valor1", 123)
+inserir_tabela(tabela_hash, "Valor2", 456)
 
-# Buscar valores na tabela hash
-resultado1 = buscar(tabela_hash, "chave1")
-resultado2 = buscar(tabela_hash, "chave2")
-resultado3 = buscar(tabela_hash, "chave3")
+result1 = busca_tabela(tabela_hash,"Valor1")
+result2 = busca_tabela(tabela_hash,"Valor2")
+result3 = busca_tabela(tabela_hash,"Valor3")
 
-print(resultado1)  # Saída: "valor1"
-print(resultado2)  # Saída: "valor2"
-print(resultado3)  # Saída: None (chave3 não existe na tabela)
+print(result1)
+print(result2)
+print(result3)
+
+
