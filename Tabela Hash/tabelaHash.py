@@ -26,6 +26,12 @@ def busca_tabela(tabela_hash, chave):
                 return vl
     return None
 
+def remove_tabela(tabela_hash, chave):
+    indice = funcao_hash(chave)
+    if tabela_hash[indice] is not None:
+        for par in tabela_hash[indice]:
+            if par[0] == chave:
+                tabela_hash[indice].remove(par)
 
 #inicializar a tabela hash como uma lista de tamanho fixo preenchida com None:
 tabela_hash = [None] * tamanho_tabela
@@ -42,3 +48,6 @@ print(result2)
 print(result3)
 
 
+remove_tabela(tabela_hash, "Valor1")
+result1 = busca_tabela(tabela_hash,"Valor1")
+print(result1)
