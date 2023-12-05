@@ -1,0 +1,77 @@
+import math
+
+class Grafo:
+    def __init__(self):
+        self.grafo = {}
+        self.infinito = float('inf')
+
+    def adicionar_vertice(self, vertice):
+        self.grafo[vertice] = {}
+
+    def adicionar_aresta(self, origem, destino, peso):
+        self.grafo[origem][destino] = peso
+
+    def dijkstra(self, origem):
+        custos = {vertice: self.infinito for vertice in self.grafo}
+        custos[origem] = 0
+
+        pais = {vertice: None for vertice in self.grafo}
+
+        processados = []
+
+        while len(processados) < len(self.grafo):
+            nodo = self.nodo_mais_baixo(custos, processados)
+            custo = custos[nodo]
+
+            vizinhos = self.grafo[nodo]
+
+            for n in vizinhos:
+                novo_custo = custo + vizinhos[n]
+                if novo_custo < custos[n]:
+                    custos[n] = novo_custo
+                    pais[n] = nodo
+
+            processados.append(nodo)
+
+        return custos, pais
+
+    def nodo_mais_baixo(self, custos, processados):
+        nodo_custo_mais_baixo = None
+        custo_mais_baixo = self.infinito
+
+        for nodo in custos:
+            if custos[nodo] < custo_mais_baixo and nodo not in processados:
+                custo_mais_baixo = custos[nodo]
+                nodo_custo_mais_baixo = nodo
+
+        return nodo_custo_mais_baixo
+
+# Exemplo de uso da classe Grafo
+grafo = Grafo()
+
+# Adiciona vértices
+grafo.adicionar_vertice("a")
+grafo.adicionar_vertice("b")
+grafo.adicionar_vertice("c")
+grafo.adicionar_vertice("d")
+grafo.adicionar_vertice("e")
+grafo.adicionar_vertice("f")
+
+# Adiciona arestas
+grafo.adicionar_aresta("a", "b", 5)
+grafo.adicionar_aresta("a", "c", 2)
+grafo.adicionar_aresta("c", "b", 8)
+grafo.adicionar_aresta("c", "e", 7)
+grafo.adicionar_aresta("e", "f", 1)
+grafo.adicionar_aresta("b", "d", 4)
+grafo.adicionar_aresta("b", "e", 2)
+grafo.adicionar_aresta("d", "e", 6)
+grafo.adicionar_aresta("d", "f", 3)
+
+# Executa o algoritmo de Dijkstra
+origem = "a"
+custos, pais = grafo.dijkstra(origem)
+
+# Exibe os resultados
+print("Custos:", custos)
+print("Pais:", pais)
