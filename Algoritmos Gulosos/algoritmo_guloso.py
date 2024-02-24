@@ -15,11 +15,11 @@ while estados_abranger:
 
     for estacao, estados_por_estacao in estacoes.items():
         coberto = estados_abranger & estados_por_estacao
-        print(coberto)
         if len(coberto) > len(estados_cobertos):
             melhor_estacao = estacao
             estados_cobertos = coberto 
 
     estados_abranger -= estados_cobertos
     estacoes_final.add(melhor_estacao)
-    print(estacoes_final)
+
+print(estacoes_final)
