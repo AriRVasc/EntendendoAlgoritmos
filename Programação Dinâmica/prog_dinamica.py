@@ -7,4 +7,4 @@ def fibonacci(target, memo = {}):
     memo[target] = fibonacci(target-1, memo) + fibonacci(target-2, memo)
     return memo[target]
 
-print(fibonacci(13))
+print(fibonacci(3))
