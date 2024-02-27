@@ -1,10 +1,10 @@
 
-def pesquisa_binaria(lista, item):
+def pesquisa_binaria(lista, item): #10 0 a 9
     baixo = 0
-    alto = len(lista) - 1
+    alto = len(lista) - 1 #9
     tentativas = 0
-    while baixo <= alto:
-        meio = (baixo + alto) // 2
+    while baixo <= alto: 
+        meio = (baixo + alto) // 2 #0 a 4 4  5 a 8
         chute = lista[meio]
         tentativas += 1
         if chute == item:
@@ -14,7 +14,7 @@ def pesquisa_binaria(lista, item):
         else: alto = meio - 1
     return None, tentativas
 
-minha_lista = [ 1, 3, 4, 5, 6, 7, 8]
+minha_lista = [ 1, 3, 4, 5, 6, 7, 8, 9]
 result, tentativas = pesquisa_binaria(minha_lista, 7)
 print(f'O item esta na posição: {result}')
 print(f'Foram necessárias {tentativas} tentativas')
